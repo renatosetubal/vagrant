@@ -2,34 +2,19 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-   config.vm.box = "aphorise/debian12"
-   config.vm.box_version = "0.0.1"
-   config.vm.box_check_update = false
-
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
-  config.vm.network "private_network", ip: "192.168.33.10"
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network", dns: "8.8.8.8"
-
-  # argument is a set of non-required options.
-   config.vm.synced_folder "files", "/files"
-  #config.vm.synced_folder ".", "/vagrant", disabled: true
-
-   config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-     vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-     vb.memory = "2024"
+   config.vm.box = "aphorise/debian12" #Nome da Imagem que será baixada
+   config.vm.box_version = "0.0.1" #Versão atual
+   config.vm.box_check_update = false #Verificar o update da vbox
+   config.vm.network "private_network", ip: "192.168.33.10" #Definindo o tipo de rede e um ip para a máquina virtual
+   config.vm.synced_folder "files", "/files" #
+  
+   config.vm.provider "virtualbox" do |vb| #Configuração da máquina virtual que será criada
+      vb.name = "Debian-Aphorise" #Definindo o nome da Máquina
+      vb.cpus = 2 #Definindo Quantidade de CPU
+      vb.gui = false #Definindo se abrirá ou não a gui do virtualbox
+      vb.memory = "2024" #Configurar a memória
    end
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-   config.vm.provision "shell", inline: <<-SHELL
-     apt-get update
-  #   apt-get install -y apache2
+   config.vm.provision "shell", inline: <<-SHELL #executando update do Debian durante o provisionamento. 
+     apt-get update -y
    SHELL
 end
