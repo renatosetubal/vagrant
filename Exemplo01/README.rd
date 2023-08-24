@@ -1,4 +1,4 @@
-# Provisionamento Básico de uma máquina Debian 12
+#Provisionamento Básico de uma máquina Debian 12
 
 Esse projeto possui um arquivo VagrantFile com configurações básicas para provisionar de forma automática um Debian 12 em seu VirtualBox
 
