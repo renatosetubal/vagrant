@@ -14,6 +14,7 @@ Vagrant.configure("2") do |config|
    config.vm.synced_folder "files", "/files" #
   
    config.vm.provider "virtualbox" do |vb| #Configuração da máquina virtual que será criada
+      vb.customize ["modifyvm", :id, "--groups", "/Vagrant"]
       vb.name = "Debian12Nextcloud" #Definindo o nome da Máquina
       vb.cpus = 2 #Definindo Quantidade de CPU
       vb.gui = false #Definindo se abrirá ou não a gui do virtualbox
@@ -21,7 +22,7 @@ Vagrant.configure("2") do |config|
    end
    config.vm.provision "shell", inline: <<-SHELL #executando update do Debian durante o provisionamento. 
      apt-get update -y
-     apt upgrade -y
+    # apt upgrade -y
      apt install -y aptitude
      apt install -y apache2
      apt install -y php libapache2-mod-php php-mysql php-common php-gd php-xml php-mbstring php-zip php-curl
