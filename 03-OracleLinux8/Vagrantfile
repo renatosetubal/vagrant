@@ -2,23 +2,19 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-   #config.vm.box = "aphorise/debian12" #Nome da Imagem que será baixada - Máquina modificada sem acesso ao root
-   #config.vm.box = "boxomatic/debian-12" #Nome da Imagem que será baixada
-   #config.vm.box = "alvistack/debian-12" #Nome da Imagem que será baixada
-   config.vm.box = "eurolinux-vagrant/oracle-linux-8" #Alma Linux 9
-   #config.vm.box_version = "1694410932"
-   #config.vm.box_version = "0.0.1" #Versão atual
+   config.vm.box = "eurolinux-vagrant/oracle-linux-8" 
    config.vm.box_check_update = false #Verificar o update da vbox
    config.vm.network "private_network", ip: "192.168.33.12" #Definindo o tipo de rede e um ip para a máquina virtual
    config.vm.synced_folder "files", "/files" #
   
    config.vm.provider "virtualbox" do |vb| #Configuração da máquina virtual que será criada
-      vb.name = "Debian-Aphorise" #Definindo o nome da Máquina
+      vb.name = "OraLinux8" #Definindo o nome da Máquina
       vb.cpus = 2 #Definindo Quantidade de CPU
       vb.gui = false #Definindo se abrirá ou não a gui do virtualbox
       vb.memory = "2024" #Configurar a memória
    end
    config.vm.provision "shell", inline: <<-SHELL #executando update do Debian durante o provisionamento. 
-    # apt-get update -y
+      dnf install -y epel-release
+      dnf -y update
    SHELL
 end
