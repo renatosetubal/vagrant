@@ -4,17 +4,21 @@
 Vagrant.configure("2") do |config|
    config.vm.box = "eurolinux-vagrant/oracle-linux-8" 
    config.vm.box_check_update = false #Verificar o update da vbox
+   config.vm.network "forwarded_port", guest:22, host: 322, host_ip: "127.0.0.1"   
    config.vm.network "private_network", ip: "192.168.33.12" #Definindo o tipo de rede e um ip para a máquina virtual
-   config.vm.synced_folder "files", "/files" #
+   config.vm.synced_folder "files", "/files" 
   
    config.vm.provider "virtualbox" do |vb| #Configuração da máquina virtual que será criada
-      vb.name = "OraLinux8" #Definindo o nome da Máquina
+      vb.customize ["modifyvm", :id, "--groups", "/Vagrant"]
+      vb.name = "OracleLinux8" #Definindo o nome da Máquina
       vb.cpus = 2 #Definindo Quantidade de CPU
       vb.gui = false #Definindo se abrirá ou não a gui do virtualbox
-      vb.memory = "2024" #Configurar a memória
+      vb.memory = "3024" #Configurar a memória
    end
    config.vm.provision "shell", inline: <<-SHELL #executando update do Debian durante o provisionamento. 
-      dnf install -y epel-release
+      hostnamectl set-hostname oralinux8   
       dnf -y update
+      dnf install -y epel-release
+      dnf -y install oracle-database-preinstall-21c
    SHELL
 end
