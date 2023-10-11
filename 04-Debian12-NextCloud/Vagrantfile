@@ -21,25 +21,30 @@ Vagrant.configure("2") do |config|
       vb.memory = "2024" #Configurar a memória
    end
    config.vm.provision "shell", inline: <<-SHELL #executando update do Debian durante o provisionamento. 
+     hostnamectl set-hostname DB12-NextCloud
      apt-get update -y
     # apt upgrade -y
      apt install -y aptitude
      apt install -y apache2
      apt install -y php libapache2-mod-php php-mysql php-common php-gd php-xml php-mbstring php-zip php-curl
      apt install -y mariadb-server
-
-     #configuradndo site Next Cloud 
-     cp /files/nextcloud /etc/apache2/sites-available/
-     ln -s /etc/apache2/sites-available/nextcloud.conf /etc/apache2/sites-enabled/
      systemctl enable --now apache2 mariadb
-     a2enmod headers rewrite env dir mime
-     cd /opt
-     wget https://download.nextcloud.com/server/releases/latest.tar.bz2
-     tar xvf latest.tar.bz2
+     #configuradndo site Next Cloud 
+     cp /files/nextcloud.conf /etc/apache2/sites-available/
+     ln -s /etc/apache2/sites-available/nextcloud.conf /etc/apache2/sites-enabled/
+     cd /files
+     if [ -e "latest.tar.bz2" ] ; then
+         tar xvf latest.tar.bz2
+      else
+         wget https://download.nextcloud.com/server/releases/latest.tar.bz2
+         tar xvf latest.tar.bz2
+      fi 
      mv nextcloud /var/www/html/
      mkdir -p /var/www/html/nextcloud/data
      chown -R www-data:www-data /var/www/html/nextcloud/
      chmod -R 755 /var/www/html/nextcloud/
+     a2enmod headers rewrite env dir mime
      systemctl restart apache2 
    SHELL
+   config.vm.provision "shell", path:"files/makedb.sh"
 end
