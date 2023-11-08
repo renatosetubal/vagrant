@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
    dnf install netcat net-tools wget perl -y
    hostnamectl set-hostname alma09teste02
    wget -P /opt https://github.com/glpi-project/glpi-agent/releases/download/1.5/glpi-agent-1.5-linux-installer.pl
-   perl /opt/glpi-agent-1.5-linux-installer.pl -s "http://glpihmlg.mpes.mp.br" --tag $(hostname -a) --httpd-trust=127.0.0.1/32 --no-ssl-check -l /tmp -Q -v
+   perl /opt/glpi-agent-1.5-linux-installer.pl -s "http://glpihmlg.mpes.mp.br" --tag $(hostname -a) --httpd-trust=127.0.0.1/32 --no-ssl-check --distro=CentOS --force --runnow -l /tmp -Q -v
    SHELL
   
 end
