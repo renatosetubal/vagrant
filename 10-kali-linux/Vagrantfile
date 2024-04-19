@@ -5,32 +5,20 @@ Vagrant.configure("2") do |config|
    # #Nome da Imagem que será baixada
    config.vm.box = "kalilinux/rolling"
    config.vm.box_version = "2023.4.0"
-   
+   #config.vm.box_download_insecure = true
    #config.vm.box_check_update = false #Verificar o update da vbox
-   config.vm.network "private_network", ip: "192.168.33.11" #Definindo o tipo de rede e um ip para a máquina virtual
+   config.vm.network "public_network", bridge: "Killer E2600 Gigabit Ethernet Controller", type: "dhcp" #Definindo o tipo de rede e um ip para a máquina virtual
    config.vm.synced_folder "Files", "/files" #
   
    config.vm.provider "virtualbox" do |vb| #Configuração da máquina virtual que será criada
-      # vb.customize ["modifyvm", :id, "--groups", "/CyberSecurity"]
-	   # vb.customize ['createhd', '--filename', '/disk/sdb', '--size', 20 * 1024]
-      # vb.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', '/disk/sdb.vdi']
-            
-      vb.name = "Kali-Dio" #Definindo o nome da Máquina
-      vb.cpus = 2 #Definindo Quantidade de CPU
+      vb.customize ["modifyvm", :id, "--groups", "/CyberSecurity"]
+	  vb.name = "Kali-Dio" #Definindo o nome da Máquina
+      vb.cpus = 1 #Definindo Quantidade de CPU
       vb.gui = false #Definindo se abrirá ou não a gui do virtualbox
-      vb.memory = "4024" #Configurar a memória
+      vb.memory = "2024" #Configurar a memória
    end
    config.vm.provision "shell", inline: <<-SHELL #executando update do Debian durante o provisionamento. 
      hostnamectl set-hostname Kali-Dio
-     apt-get update -y
-     apt install xen-system-amd64 xen-tools bridge-utils net-tools xfsprogs vim -y #Instalando as ferramentas do Xen
-	#  echo 'GRUB_CMDLINE_XEN_DEFAULT="dom0_max_vcpus=1 dom0_mem=1014M,max:1024M"' >> /etc/default/grub
-   #   update-grub2 #Definindo Xen como boot no grub (atualizacao)
-	#  mkfs.xfs /dev/sdb
-	#  mkdir /mnt/sdb -p
-	#  mount /dev/sdb /mnt/sdb
-	#  echo "/dev/sdb /mnt/sdb xfs defaults 0 0" >> /etc/fstab
-	#  reboot
    SHELL
    # config.vm.provision "shell", path:"files/makedb.sh"
 end
