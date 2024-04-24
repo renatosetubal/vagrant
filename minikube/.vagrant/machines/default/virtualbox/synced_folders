@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-{"virtualbox":{"/files":{"guestpath":"/files","hostpath":"E:/RepoGit/vagrant/minikube","disabled":false,"__vagrantfile":true}}}
-=======
-{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/Devops/Repositorios/vagrant/minikube","disabled":false,"__vagrantfile":true}}}
->>>>>>> 46dc0a9ee83769d21a1763abcdc8f3e26fa8fa73
