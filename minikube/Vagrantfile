@@ -4,8 +4,8 @@ Vagrant.configure("2") do |config|
    config.vm.box = "marcelobaptista/minikube"
    config.vm.box_version = "1.0.0"
    #"ilionx/ubuntu2204-minikube"
-   
-   config.vm.network "public_network"
+   config.vm.network "forwarded_port", guest: 80, host: 8080
+   config.vm.network "public_network", bridge:"auto"
    config.vm.synced_folder ".", "/files" #
   
    config.vm.provider "virtualbox" do |vb| #Configuração da máquina virtual que será criada
