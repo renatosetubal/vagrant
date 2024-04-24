@@ -1,1 +1,1 @@
-{"virtualbox":{"/files":{"guestpath":"/files","hostpath":"D:/Devops/Repositorios/vagrant/minikube","disabled":false,"__vagrantfile":true}}}
+{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"D:/Devops/Repositorios/vagrant/minikube","disabled":false,"__vagrantfile":true}}}
