@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+Vagrant.configure("2") do |config|
+   config.vm.box = "marcelobaptista/zabbix"
+   #config.vm.box_version = "1.0.0"
+   #"ilionx/ubuntu2204-minikube"
+   config.vm.network "forwarded_port", guest: 80, host: 8080
+   config.vm.network "public_network", bridge:"auto"
+   config.vm.synced_folder ".", "/files" #
+   config.vm.provider "virtualbox" do |vb| #Configuração da máquina virtual que será criada
+      vb.name = "Zabbix-Server" #Definindo o nome da Máquina
+      vb.cpus = 2 #Definindo Quantidade de CPU
+      vb.gui = false #Definindo se abrirá ou não a gui do virtualbox
+      vb.memory = "2024" #Configurar a memória
+   end
+   config.vm.provision "shell", inline: <<-SHELL #executando update do Debian durante o provisionamento. 
+     
+   SHELL
+end
+
