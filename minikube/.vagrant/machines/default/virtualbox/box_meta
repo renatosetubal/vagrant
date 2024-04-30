@@ -1,1 +1,1 @@
-{"name":"marcelobaptista/minikube","version":"1.0.0","provider":"virtualbox","directory":"boxes/marcelobaptista-VAGRANTSLASH-minikube/1.0.0/amd64/virtualbox"}
+{"name":"debian/buster64","version":"10.20231211.1","provider":"virtualbox","directory":"boxes/debian-VAGRANTSLASH-buster64/10.20231211.1/virtualbox"}
