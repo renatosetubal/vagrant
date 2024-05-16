@@ -6,13 +6,13 @@ Vagrant.configure("2") do |config|
    #"ilionx/ubuntu2204-minikube"
    config.vm.network "forwarded_port", guest: 80, host: 8080
    config.vm.network "public_network"
-   config.vm.synced_folder ".", "/vagrant" #
+   config.vm.synced_folder "kubernetes", "/vagrant_files" #
   
    config.vm.provider "virtualbox" do |vb| #Configuração da máquina virtual que será criada
       vb.name = "minikube-dio" #Definindo o nome da Máquina
-      vb.cpus = 2 #Definindo Quantidade de CPU
+      vb.cpus = 3 #Definindo Quantidade de CPU
       vb.gui = false #Definindo se abrirá ou não a gui do virtualbox
-      vb.memory = "2024" #Configurar a memória
+      vb.memory = "4024" #Configurar a memória
    end
    config.vm.provision "shell", inline: <<-SHELL #executando update do Debian durante o provisionamento. 
      
