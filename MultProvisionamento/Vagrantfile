@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+machines = {
+  'debian' => {'memory' => '1024', 'cpus' => 1, 'ip' => '97', 'box' => 'debian/bullseye64', 'provision' => 'debian.sh'},
+  'alma' => {'memory' => '1024', 'cpus' => 1, 'ip' => '22', 'box' => 'almalinux/8', 'provision' => 'alma.sh'},
+}
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box_check_update = false
+
+  machines.each do |name, conf|
+    config.vm.define "#{name}" do |m|
+      m.vm.box = "#{conf['box']}"
+      m.vm.network 'private_network', ip: "192.168.57.#{conf['ip']}"
+      m.vm.hostname = "#{name}"
+      m.vm.provider 'virtualbox' do |vb|
+        vb.memory = conf['memory']
+        vb.cpus = conf['cpus']
+        vb.name = "#{name}"
+      end
+      #m.vm.disk :disk, size: "25GB", name: "new_storage"
+      #m.vm.provision 'shell', path: "provision/#{conf['provision']}"
+    end
+  end
+end
