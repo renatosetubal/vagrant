@@ -1,0 +1,33 @@
+
+- name: apache
+  cpus: 4
+  memory: 6024
+  net: private_network
+  ip: 192.168.2.10
+  ports:
+      - guest: 80
+        host: 8080
+      - guest: 443
+        host: 8443
+  disk:
+      - enable: false
+      - size: 10G
+      - desc: sdb
+  box: bento/debian-12
+  script: sh/debian.sh
+
+- name: mariadb
+  cpus: 2
+  memory: 4048
+  net: private_network
+  ip: 192.168.2.20
+  ports:
+      - guest: 3306
+        host: 3306
+  disk:
+      - enable: true
+      - size: 10G
+      - desc: sdb
+  box: bento/debian-12
+  script: sh/debian.sh
+
