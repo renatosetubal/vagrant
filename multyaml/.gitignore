@@ -3,3 +3,4 @@
 *.sql
 *.gz
 *.zip
+/files/

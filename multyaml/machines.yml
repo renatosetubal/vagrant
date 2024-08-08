@@ -1,7 +1,7 @@
 
 - name: apache
-  cpus: 4
-  memory: 6024
+  cpus: 2
+  memory: 3024
   net: private_network
   ip: 192.168.2.10
   ports:
@@ -18,7 +18,7 @@
 
 - name: mariadb
   cpus: 2
-  memory: 4048
+  memory: 2048
   net: private_network
   ip: 192.168.2.20
   ports:
@@ -30,4 +30,23 @@
       - desc: sdb
   box: bento/debian-12
   script: sh/debian.sh
+###Maquina GLPI para instalação full
+- name: GLPI
+  cpus: 2
+  memory: 6048
+  net: private_network
+  ip: 192.168.2.20
+  ports:
+      - guest: 3306
+        host: 3306
+      - guest: 80
+        host: 8080
+      - guest: 443
+        host: 8443
+  disk:
+      - enable: true
+      - size: 10G
+      - desc: sdb
+  box: bento/debian-12
+  script: sh/debian.sh  
 
