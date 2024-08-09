@@ -5,14 +5,14 @@
   net: private_network
   ip: 192.168.2.10
   ports:
-      - guest: 80
-        host: 8888
-      - guest: 443
-        host: 443
+  - guest: 80
+    host: 8888
+  - guest: 443
+    host: 443
   disk:
-       enable: true
-       size: 4GB
-       desc: sdb
+    enable: false
+    size: 4GB
+    desc: sdb
   box: bento/debian-12
   script: sh/debian.sh
 
@@ -22,31 +22,31 @@
   net: private_network
   ip: 192.168.2.20
   ports:
-      - guest: 3306
-        host: 3306
+  - guest: 3306
+    host: 3306
   disk:
-       enable: true
-       size: 10GB
-       desc: sdb
+    enable: true
+    size: 10GB
+    desc: sdb
   box: bento/debian-12
   script: sh/debian.sh
 
-- name: glpi
+- name: GLPI
   cpus: 2
   memory: 6048
   net: private_network
   ip: 192.168.2.30
   ports:
-      - guest: 3306
-        host: 3306
-      - guest: 80
-        host: 8080
-      - guest: 443
-        host: 8443
+  - guest: 3306
+    host: 3306
+  - guest: 80
+    host: 8080
+  - guest: 443
+    host: 8443
   disk:
-       enable: true
-       size: 7GB
-       desc: sdb
+    enable: true
+    size: 10GB
+    desc: sdb
   box: bento/debian-12
-  script: sh/debian.sh  
+  script: sh/debian.sh
 
