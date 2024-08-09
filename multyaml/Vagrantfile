@@ -17,10 +17,8 @@ Vagrant.configure("2") do |config|
       machines["ports"].each do |port|
         server.vm.network "forwarded_port", guest: port["guest"], host: port["host"]
       end
-      machines["disk"].each do |disco|
-        if disco['enable']
-          server.vm.disk :disk, size: "10GB" , name: "sdb"
-        end
+      if machines['disk']['enable']
+        server.vm.disk :disk, size: machines['disk']['size'], name: "#{machines['name']}#{machines['disk']['desc']}"
       end
             
       server.vm.provider "virtualbox" do |vb|

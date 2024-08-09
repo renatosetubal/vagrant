@@ -6,13 +6,13 @@
   ip: 192.168.2.10
   ports:
       - guest: 80
-        host: 8080
+        host: 8888
       - guest: 443
-        host: 8443
+        host: 443
   disk:
-      - enable: false
-      - size: 10G
-      - desc: sdb
+       enable: true
+       size: 4GB
+       desc: sdb
   box: bento/debian-12
   script: sh/debian.sh
 
@@ -25,17 +25,17 @@
       - guest: 3306
         host: 3306
   disk:
-      - enable: true
-      - size: 10G
-      - desc: sdb
+       enable: true
+       size: 10GB
+       desc: sdb
   box: bento/debian-12
   script: sh/debian.sh
-###Maquina GLPI para instalação full
-- name: GLPI
+
+- name: glpi
   cpus: 2
   memory: 6048
   net: private_network
-  ip: 192.168.2.20
+  ip: 192.168.2.30
   ports:
       - guest: 3306
         host: 3306
@@ -44,9 +44,9 @@
       - guest: 443
         host: 8443
   disk:
-      - enable: true
-      - size: 10G
-      - desc: sdb
+       enable: true
+       size: 7GB
+       desc: sdb
   box: bento/debian-12
   script: sh/debian.sh  
 
