@@ -4,7 +4,7 @@
   memory: 1024
   net: private_network
   ip: 192.168.2.10
-  box: bento/debian-12
+  box: zsram/debian12-docker
   script: sh/debian.sh
 
 - name: worker02
@@ -12,7 +12,7 @@
   memory: 1024
   net: private_network
   ip: 192.168.2.11
-  box: bento/debian-12
+  box: zsram/debian12-docker
   script: sh/debian.sh
 
 - name: worker03
@@ -20,7 +20,7 @@
   memory: 1024
   net: private_network
   ip: 192.168.2.12
-  box: bento/debian-12
+  box: zsram/debian12-docker
   script: sh/debian.sh
 
 - name: swarm01
