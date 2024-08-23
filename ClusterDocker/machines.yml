@@ -1,0 +1,40 @@
+
+- name: worker01
+  cpus: 1
+  memory: 1024
+  net: private_network
+  ip: 192.168.2.10
+  box: bento/debian-12
+  script: sh/debian.sh
+
+- name: worker02
+  cpus: 1
+  memory: 1024
+  net: private_network
+  ip: 192.168.2.11
+  box: bento/debian-12
+  script: sh/debian.sh
+
+- name: worker03
+  cpus: 1
+  memory: 1024
+  net: private_network
+  ip: 192.168.2.12
+  box: bento/debian-12
+  script: sh/debian.sh
+
+- name: swarm01
+  cpus: 1
+  memory: 1024
+  net: private_network
+  ip: 192.168.2.2
+  box: zsram/debian12-docker
+  script: sh/debian.sh
+
+- name: swarm02
+  cpus: 1
+  memory: 1024
+  net: private_network
+  ip: 192.168.2.3
+  box: zsram/debian12-docker
+  script: sh/debian.sh
