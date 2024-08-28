@@ -27,5 +27,5 @@ sed -i 's|#datadir[[:space:]]*= /var/lib/mysql|datadir = /mnt/mariadb_datadir|' 
 systemctl enable --now mariadb;
 
 mysql -u root -e "create user dba@'localhost' identified by 'Mpes123';"
-mysql-u root -e "GRANT ALL PRIVILEGES ON *.* TO 'dba'@'%' IDENTIFIED BY 'Mpes123';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'dba'@'%' IDENTIFIED BY 'Mpes123';"
 mysql -u root -e "FLUSH PRIVILEGES;"
