@@ -7,7 +7,7 @@
   enableport: true
   ports:
   - guest: 80
-    host: 8888
+    host: 8080
   - guest: 443
     host: 443
   disk:
@@ -15,7 +15,8 @@
     size: 4GB
     desc: sdb
   box: bento/debian-12
-  script: sh/debian.sh
+  script: sh/debianglpi.sh
+  folder:
 
 - name: mariadb
   cpus: 2
@@ -31,7 +32,8 @@
     size: 10GB
     desc: sdb
   box: bento/debian-12
-  script: sh/debian.sh
+  script: sh/debianmariadb.sh
+  folder:
 
 - name: GLPI
   cpus: 2
@@ -52,6 +54,7 @@
     desc: sdb
   box: bento/debian-12
   script: sh/debian.sh
+  folder:
 
 - name: fedora40
   cpus: 4
@@ -67,4 +70,5 @@
     size: 10GB
     desc: sdb
   box: bento/fedora-latest
-  script: sh/fedora.sh
+  script:
+  folder:
