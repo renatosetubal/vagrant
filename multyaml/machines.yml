@@ -4,6 +4,7 @@
   memory: 3024
   net: private_network
   ip: 192.168.2.10
+  enableport: true
   ports:
   - guest: 80
     host: 8888
@@ -21,6 +22,7 @@
   memory: 2048
   net: private_network
   ip: 192.168.2.20
+  enableport: true
   ports:
   - guest: 3306
     host: 3306
@@ -36,6 +38,7 @@
   memory: 6048
   net: private_network
   ip: 192.168.2.30
+  enableport: true
   ports:
   - guest: 3306
     host: 3306
@@ -50,21 +53,18 @@
   box: bento/debian-12
   script: sh/debian.sh
 
-- name: minikube
+- name: fedora40
   cpus: 4
   memory: 6048
   net: private_network
-  ip: 192.168.2.30
+  ip: 192.168.2.31
+  enableport: false
   ports:
-  - guest: 3306
-    host: 3336
   - guest: 80
-    host: 8080
-  - guest: 443
-    host: 8433
+    host: 8083
   disk:
     enable: false
     size: 10GB
     desc: sdb
-  box: ilionx/ubuntu2204-minikube
-  script: sh/debian.sh
+  box: bento/fedora-latest
+  script: sh/fedora.sh
