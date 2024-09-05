@@ -32,9 +32,6 @@ Vagrant.configure("2") do |config|
       if machines['script']
         server.vm.provision "shell", path: machines["script"]
       end
-      if machines['folder']
-        server.vm.synced_folder machines['folder'], "/var/www/"  
-      end  
     end
   end
 end

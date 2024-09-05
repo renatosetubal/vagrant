@@ -16,7 +16,6 @@
     desc: sdb
   box: bento/debian-12
   script: sh/debian.sh
-  folder:
 
 - name: w10
   cpus: 2
@@ -33,4 +32,3 @@
     desc: sdb
   box: fishi0x01/win-10-pro-x64
   script:
-  folder:
