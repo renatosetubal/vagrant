@@ -1,0 +1,1 @@
+samba-tool domain provision --use-rfc2307 --domain=DISTRIMAX --realm=DISTRIMAX.LOCAL
