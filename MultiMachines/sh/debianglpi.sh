@@ -21,20 +21,20 @@ fi
 
 unzip /vagrant/files/glpi-10.0.16.zip -d /var/www/verdanadesk/;
 mv -f /var/www/verdanadesk/glpi-10.0.16 /var/www/verdanadesk/glpi;
-
-
+mkdir -p /var/www/verdanadesk/files/{_cron,_dumps,_graphs,_lock,_pictures,_plugins,_rss,_sessions,_tmp,_uploads}
+mkdir -p /var/www/verdanadesk/glpi/marketplace
 
 mv /var/www/verdanadesk/glpi/files /var/www/verdanadesk/
 mv /var/www/verdanadesk/glpi/config /var/www/verdanadesk/
-sed -i 's/\/config/\/..\/config/g' /var/www/verdanadesk/glpi/inc/based_config.php
-sed -i 's/\/files/\/..\/files/g' /var/www/verdanadesk/glpi/inc/based_config.php
-chown root:root /var/www/verdanadesk/glpi -Rfv
-chown www-data:www-data /var/www/verdanadesk/files -Rfv
-chown www-data:www-data /var/www/verdanadesk/config -Rfv
-chown www-data:www-data /var/www/verdanadesk/glpi/marketplace -Rfv
+#sed -i 's/\/config/\/..\/config/g' /var/www/verdanadesk/glpi/inc/based_config.php
+#sed -i 's/\/files/\/..\/files/g' /var/www/verdanadesk/glpi/inc/based_config.php
+chown root:root /var/www/verdanadesk/glpi -Rfv;
+chown www-data:www-data /var/www/verdanadesk/files -Rfv;
+chown www-data:www-data /var/www/verdanadesk/config -Rfv;
+chown www-data:www-data /var/www/verdanadesk/glpi/marketplace -Rfv;
 find /var/www/verdanadesk/ -type d -exec chmod 755 {} \;
 find /var/www/verdanadesk/ -type f -exec chmod 644 {} \;
-ln -s /var/www/verdanadesk/glpi /var/www/html/glpi
+ln -s /var/www/verdanadesk/glpi /var/www/html/glpi;
 #Alterando parâmetro do php
 sed -i 's/^session.cookie_httponly.*/session.cookie_httponly = on/' $CAMINHO_PHP
 systemctl reload apache2
