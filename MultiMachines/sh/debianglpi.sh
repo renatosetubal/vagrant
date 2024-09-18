@@ -26,8 +26,9 @@ mkdir -p /var/www/verdanadesk/glpi/marketplace
 
 mv /var/www/verdanadesk/glpi/files /var/www/verdanadesk/
 mv /var/www/verdanadesk/glpi/config /var/www/verdanadesk/
-#sed -i 's/\/config/\/..\/config/g' /var/www/verdanadesk/glpi/inc/based_config.php
-#sed -i 's/\/files/\/..\/files/g' /var/www/verdanadesk/glpi/inc/based_config.php
+sed -i "s|GLPI_CONFIG_DIR' *=> *GLPI_ROOT . '/../../config'|GLPI_CONFIG_DIR' => GLPI_ROOT . '/../config'|g" /var/www/verdanadesk/glpi/inc/based_config.php
+sed -i "s|GLPI_VAR_DIR' *=> *GLPI_ROOT . '/../../files'|GLPI_VAR_DIR' => GLPI_ROOT . '/../files'|g" /var/www/verdanadesk/glpi/inc/based_config.php
+
 chown root:root /var/www/verdanadesk/glpi -Rfv;
 chown www-data:www-data /var/www/verdanadesk/files -Rfv;
 chown www-data:www-data /var/www/verdanadesk/config -Rfv;
@@ -64,6 +65,10 @@ ln -s $NOVO_DIR/mysql/mysql.sock /var/lib/mysql/mysql.sock
 cp $ARQ_CNF $ARQ_CNF.old -Rfv
 sed -i 's/^bind-address.*/bind-address = 0.0.0.0/' $ARQ_CNF
 sed -i 's|#datadir[[:space:]]*= /var/lib/mysql|datadir = /mnt/mariadb_datadir|' $ARQ_CNF
+
+
+
+
 
 # #Habilitando e iniciando o serviço
 systemctl restart mariadb;
