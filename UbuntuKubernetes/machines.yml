@@ -1,0 +1,58 @@
+
+- name: cplane
+  cpus: 2
+  memory: 3024
+  net: private_network
+  ip: 192.168.2.10
+  enableport: true
+  ports:
+  - guest: 80
+    host: 8080
+  - guest: 443
+    host: 443
+  disk:
+    enable: false
+    size: 4GB
+    desc: sdb
+  box: ubuntu/jammy64
+  script:
+  folder:
+
+- name: worker1
+  cpus: 2
+  memory: 2048
+  net: private_network
+  ip: 192.168.2.20
+  enableport: false
+  ports:
+  - guest: 3306
+    host: 3306
+  disk:
+    enable: false
+    size: 10GB
+    desc: sdb
+  box: ubuntu/jammy64
+  script:
+  folder:
+
+- name: worker2
+  cpus: 2
+  memory: 2048
+  net: private_network
+  ip: 192.168.2.30
+  enableport: false
+  ports:
+  - guest: 3306
+    host: 3306
+  - guest: 80
+    host: 8080
+  - guest: 443
+    host: 8443
+  disk:
+    enable: false
+    size: 10GB
+    desc: sdb
+  box: ubuntu/jammy64
+  script:
+  folder:
+
