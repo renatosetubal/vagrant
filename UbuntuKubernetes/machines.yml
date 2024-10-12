@@ -20,7 +20,7 @@
 
 - name: worker1
   cpus: 2
-  memory: 2048
+  memory: 1048
   net: private_network
   ip: 192.168.2.20
   enableport: false
@@ -37,7 +37,7 @@
 
 - name: worker2
   cpus: 2
-  memory: 2048
+  memory: 1048
   net: private_network
   ip: 192.168.2.30
   enableport: false

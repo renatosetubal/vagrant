@@ -106,3 +106,20 @@
   box: bento/debian-12
   script:
   folder:
+
+- name: Alma9
+  cpus: 2
+  memory: 4048
+  net: private_network
+  ip: 192.168.2.34
+  enableport: false
+  ports:
+  - guest: 80
+    host: 8084
+  disk:
+    enable: true
+    size: 5GB
+    desc: sdb
+  box: almalinux/9
+  script:
+  folder:
