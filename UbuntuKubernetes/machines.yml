@@ -1,21 +1,23 @@
 
 - name: cplane
   cpus: 2
-  memory: 3024
+  memory: 4024
   net: private_network
   ip: 192.168.2.10
   enableport: true
   ports:
   - guest: 80
     host: 8080
-  - guest: 443
-    host: 443
+  - guest: 10248
+    host: 10248
+  - guest: 6443
+    host: 6443
   disk:
     enable: false
     size: 4GB
     desc: sdb
   box: ubuntu/jammy64
-  script:
+  script: provisiona.sh
   folder:
 
 - name: worker1
@@ -32,7 +34,7 @@
     size: 10GB
     desc: sdb
   box: ubuntu/jammy64
-  script:
+  script: provisiona.sh
   folder:
 
 - name: worker2
@@ -53,6 +55,6 @@
     size: 10GB
     desc: sdb
   box: ubuntu/jammy64
-  script:
+  script: provisiona.sh
   folder:
 

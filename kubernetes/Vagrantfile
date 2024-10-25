@@ -1,0 +1,35 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+machines = {
+  'minikube' => {'memory' => '4024', 'cpus' => 2, 'ip' => '97', 'box' => 'ilionx/ubuntu2204-minikube', 'provision' => 'minikube.sh'}#,
+  #'debian' => {'memory' => '4024', 'cpus' => 2, 'ip' => '97', 'box' => 'alvistack/kubernetes-1.29', 'provision' => 'debian.sh'}
+  #'alma' => {'memory' => '1024', 'cpus' => 1, 'ip' => '22', 'box' => 'almalinux/8', 'provision' => 'alma.sh'},
+}
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box_check_update = false
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.synced_folder ".", "/files"
+  machines.each do |name, conf|
+    config.vm.define "#{name}" do |m|
+      m.vm.box = "#{conf['box']}"
+      m.vm.network 'private_network', ip: "192.168.57.#{conf['ip']}"
+      m.vm.hostname = "#{name}"
+      m.vm.provider 'virtualbox' do |vb|
+        vb.memory = conf['memory']
+        vb.cpus = conf['cpus']
+        vb.name = "#{name}"
+        vb.customize ["modifyvm", :id, "--groups", "/kubernetes"]
+      end
+      m.vm.disk :disk, size: "25GB", name: "minikube_sdb"
+      m.vm.provision 'shell', path: "provision/#{conf['provision']}"
+    end
+  end
+  # config.vm.provision "shell", inline: <<-SHELL 
+  #     apt update -y
+  #     apt install net-tools vim  -y
+  #     minikube start
+  #   SHELL
+end

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod #Tipo de objeto que sera criado
+metadata:
+  name: app-html
+  labels: 
+    app: app-html
+spec: #especificacao do container
+  containers:
+  - name: app-html
+    image: httpd:latest # imagem do container desejado
+    ports:
+    - containerPort: 80 #Porta que será usada, se tiver mais de uma, coloca abaixo
