@@ -1,0 +1,67 @@
+- name: minio1
+  cpus: 1
+  memory: 1048
+  net: private_network
+  ip: 192.168.2.2
+  enableport: true
+  ports:
+  - guest: 9000
+    host: 9001
+  disk:
+    enable: true
+    size: 5GB
+    desc: sdb
+  box: bento/debian-12
+  script: prov/minio.sh
+  folder:
+
+- name: minio2
+  cpus: 1
+  memory: 1048
+  net: private_network
+  ip: 192.168.2.3
+  enableport: true
+  ports:
+  - guest: 9000
+    host: 9002
+  disk:
+    enable: true
+    size: 5GB
+    desc: sdb
+  box: bento/debian-12
+  script: prov/minio.sh
+  folder:
+
+- name: minio3
+  cpus: 1
+  memory: 1048
+  net: private_network
+  ip: 192.168.2.4
+  enableport: true
+  ports:
+  - guest: 9000
+    host: 9003
+  disk:
+    enable: true
+    size: 5GB
+    desc: sdb
+  box: bento/debian-12
+  script: prov/minio.sh
+  folder:
+  
+- name: minio4
+  cpus: 1
+  memory: 1048
+  net: private_network
+  ip: 192.168.2.5
+  enableport: true
+  ports:
+  - guest: 9000
+    host: 9004
+  disk:
+    enable: true
+    size: 5GB
+    desc: sdb
+  box: bento/debian-12
+  script: prov/minio.sh
+  folder:

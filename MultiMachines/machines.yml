@@ -117,60 +117,26 @@
   - guest: 80
     host: 8084
   disk:
-    enable: true
+    enable: false
     size: 5GB
     desc: sdb
   box: almalinux/9
   script:
   folder:
 
-- name: NFS
-  cpus: 2
-  memory: 4048
+- name: nfs
+  cpus: 1
+  memory: 1048
   net: private_network
   ip: 192.168.2.35
-  enableport: false
+  enableport: true
   ports:
-  - guest: 80
-    host: 8084
+  - guest: 2049
+    host: 2049
   disk:
     enable: true
     size: 5GB
     desc: sdb
   box: bento/debian-12
   script: prov/nfs.sh
-  folder:
-
-- name: minio1
-  cpus: 2
-  memory: 4048
-  net: private_network
-  ip: 192.168.2.36
-  enableport: true
-  ports:
-  - guest: 9000
-    host: 9001
-  disk:
-    enable: true
-    size: 5GB
-    desc: sdb
-  box: bento/debian-12
-  script: prov/minio.sh
-  folder:
-
-- name: minio2
-  cpus: 2
-  memory: 4048
-  net: private_network
-  ip: 192.168.2.37
-  enableport: true
-  ports:
-  - guest: 9000
-    host: 9002
-  disk:
-    enable: true
-    size: 5GB
-    desc: sdb
-  box: bento/debian-12
-  script: prov/minio.sh
   folder:
