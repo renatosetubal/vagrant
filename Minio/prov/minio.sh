@@ -1,24 +1,25 @@
 #!/bin/bash
 apt update;
 apt upgrade -y;
-apt install vim net-tools htop xfsprogs wget nfs-kernel-server -y
+apt install net-tools xfsprogs wget -y
 wget --no-check-certificate https://dl.min.io/server/minio/release/linux-amd64/archive/minio_20241013133411.0.0_amd64.deb -O minio.deb
 dpkg -i minio.deb
 mkfs.xfs /dev/sdb
-mkdir /mnt/sdb
-echo "/dev/sdb /mnt/sdb xfs defaults 0 0" >> /etc/fstab
+mkfs.xfs /dev/sdc
+mkfs.xfs /dev/sdd
+mkfs.xfs /dev/sde
+mkdir -p /mnt/{disk1,disk2,disk3,disk4}
+echo "/dev/sdb /mnt/disk1 xfs defaults 0 0" >> /etc/fstab
+echo "/dev/sdc /mnt/disk2 xfs defaults 0 0" >> /etc/fstab
+echo "/dev/sdd /mnt/disk3 xfs defaults 0 0" >> /etc/fstab
+echo "/dev/sde /mnt/disk4 xfs defaults 0 0" >> /etc/fstab
 mount -a
 systemctl daemon-reload
 cp /vagrant/prov/minio /etc/default/
 cp /vagrant/prov/minio.service /usr/lib/systemd/system/
 groupadd -r minio-user
 useradd -M -r -g minio-user minio-user
-mkdir -p /mnt/sdb
-chown minio-user:minio-user /mnt/sdb/ -Rfv
-chmod 777 /mnt/sdb -Rfv
+mkdir -p /mnt/disk{1..4}/minio
+chown minio-user:minio-user /mnt/disk1 /mnt/disk2 /mnt/disk3 /mnt/disk4
+chmod 777 /mnt/disk* -Rfv
 systemctl enable --now minio
-# wget --no-check-certificate https://dl.minio.io/server/minio/release/linux-amd64/minio -O /usr/local/bin/minio
-# chmod +x /usr/local/bin/minio
-# wget --no-check-certificate https://dl.min.io/client/mc/release/linux-amd64/mc -O /usr/local/bin/mc
-# chmod +x /usr/local/bin/mc
-

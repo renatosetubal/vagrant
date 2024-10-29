@@ -3,13 +3,12 @@
 # Omit to use the default values 'minioadmin:minioadmin'.
 # MinIO recommends setting non-default values as a best practice, regardless of environment
 
-MINIO_ROOT_USER=minioadmin
+MINIO_ROOT_USER=miniadmin
 MINIO_ROOT_PASSWORD=minioadmin
 
 # MINIO_VOLUMES sets the storage volume or path to use for the MinIO server.
 
-MINIO_VOLUMES="/mnt/sdb"
-
+MINIO_VOLUMES=mnt/disk{1...4}
 # MINIO_OPTS sets any additional commandline options to pass to the MinIO server.
 # For example, `--console-address :9001` sets the MinIO Console listen port
 MINIO_OPTS="--console-address :9001"

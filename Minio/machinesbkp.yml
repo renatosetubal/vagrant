@@ -6,17 +6,11 @@
   enableport: true
   ports:
   - guest: 9000
-    host: 9000
-  enabledisk: true
-  disks:
-  - size: 5GB
-    name: sdb
-  - size: 5GB
-    name: sdc
-  - size: 5GB
-    name: sdd
-  - size: 5GB
-    name: sde
+    host: 9001
+  disk:
+    enable: true
+    size: 5GB
+    desc: sdb
   box: bento/debian-12
   script: prov/minio.sh
   folder:
@@ -30,16 +24,10 @@
   ports:
   - guest: 9000
     host: 9002
-  enabledisk: true
-  disks:
-  - size: 5GB
-    name: sdb
-  - size: 5GB
-    name: sdc
-  - size: 5GB
-    name: sdd
-  - size: 5GB
-    name: sde
+  disk:
+    enable: true
+    size: 5GB
+    desc: sdb
   box: bento/debian-12
   script: prov/minio.sh
   folder:
@@ -53,20 +41,14 @@
   ports:
   - guest: 9000
     host: 9003
-  enabledisk: true
-  disks:
-  - size: 5GB
-    name: sdb
-  - size: 5GB
-    name: sdc
-  - size: 5GB
-    name: sdd
-  - size: 5GB
-    name: sde
+  disk:
+    enable: true
+    size: 5GB
+    desc: sdb
   box: bento/debian-12
   script: prov/minio.sh
   folder:
-
+  
 - name: minio4
   cpus: 1
   memory: 1048
@@ -76,16 +58,10 @@
   ports:
   - guest: 9000
     host: 9004
-  enabledisk: true
-  disks:
-  - size: 5GB
-    name: sdb
-  - size: 5GB
-    name: sdc
-  - size: 5GB
-    name: sdd
-  - size: 5GB
-    name: sde
+  disk:
+    enable: true
+    size: 5GB
+    desc: sdb
   box: bento/debian-12
   script: prov/minio.sh
   folder:
