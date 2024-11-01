@@ -1,3 +1,25 @@
+# - name: proxy
+#   cpus: 1
+#   memory: 1048
+#   net: private_network
+#   ip: 192.168.2.1
+#   enableport: true
+#   ports:
+#   - guest: 80
+#     host: 8888
+#   enabledisk: false
+#   disks:
+#   - size: 5GB
+#     name: sdb
+#   - size: 5GB
+#     name: sdc
+#   - size: 5GB
+#     name: sdd
+#   - size: 5GB
+#     name: sde
+#   box: bento/debian-12
+#   script:
+#   folder:
 - name: minio1
   cpus: 1
   memory: 1048

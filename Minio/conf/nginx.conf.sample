@@ -1,0 +1,20 @@
+events{
+    worker_connections 1024;
+}
+http {
+    upstream minio {
+        server 192.168.2.2.nip.io:9000;
+        server 192.168.2.3.nip.io:9000;
+        server 192.168.2.4.nip.io:9000;
+        server 192.168.2.5.nip.io:9000;
+    }
+
+    server {
+        listen 80;
+        server_name http://minio.local;
+
+        location / {
+            proxy_pass http://minio;
+        }
+    }
+}
