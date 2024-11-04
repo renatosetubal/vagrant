@@ -20,31 +20,39 @@ Vagrant.configure("2") do |config|
             if netbr["tiporede"] == "private_network"
               server.vm.network netbr["tiporede"], ip: netbr["ipfixo"], dns: netbr["dns"] 
             else
-              server.vm.network netbr["tiporede"], bridge: netbr["adaptador"],  type: netbr["tipoconexao"], dns: netbr["dns"]
+              if netbr["tipoconexao"] == "dhcp"
+                server.vm.network netbr["tiporede"], bridge: netbr["adaptador"],  type: netbr["tipoconexao"], dns: netbr["dns"]
+              else
+                server.vm.network netbr["tiporede"], bridge: netbr["adaptador"],  ip: netbr["ipfixo"], dns: netbr["dns"]
+              end
             end
           end
       end  
       #Mapear as portas guestxhost
-      if machines['enableport'] == true
+      if machines['ports'] 
           machines["ports"].each do |port|
-          server.vm.network "forwarded_port", guest: port["guest"], host: port["host"]
+            if port["status"] == true
+               server.vm.network "forwarded_port", guest: port["guest"], host: port["host"]
+            end   
         end
       end  
-      if machines['enabledisk'] == true
+      #Preparar discos extras
+      if machines['disks']
         machines["disks"].each do |disc|
-          server.vm.disk :disk, size: disc['size'], name: disc['name']
+          if disc["status"] == true
+            server.vm.disk :disk, size: disc['size'], name: disc['name']
+          end
       end
     end  
- 
     server.vm.provider "virtualbox" do |vb|
-        vb.customize ["modifyvm", :id, "--groups", "/Minio"]
-        vb.memory = machines["memory"]
-        vb.cpus = machines["cpus"]
-        vb.name = machines["name"]
-      end
-      if machines['script']
-        server.vm.provision "shell", path: machines["script"]
-      end
+      vb.customize ["modifyvm", :id, "--groups", "/Minio"]
+      vb.memory = machines["memory"]
+      vb.cpus = machines["cpus"]
+      vb.name = machines["name"]
+    end
+    if machines['script']
+      server.vm.provision "shell", path: machines["script"]
+     end
       # if machines['folder']
       #   server.vm.synced_folder machines['folder'], "/var/www/"  
       # end  

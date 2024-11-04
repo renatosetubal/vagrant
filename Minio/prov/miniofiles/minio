@@ -1,0 +1,6 @@
+MINIO_ROOT_USER="minioadmin"
+MINIO_ROOT_PASSWORD="minioadmin"
+
+MINIO_VOLUMES="http://192.168.2.10/mnt/disk{1...4}/minio http://192.168.2.20/mnt/disk{1...4}/minio  http://192.168.2.30/mnt/disk{1...4}/minio http://192.168.2.40/mnt/disk{1...4}/minio "
+
+MINIO_OPTS="--console-address :9001"

@@ -41,11 +41,22 @@ frontend minio_frontend
 backend minio_backend
         mode http
 	balance roundrobin
-	server minio1 192.168.2.2:9001 check
-	server minio2 192.168.2.3:9001 check
-	server minio3 192.168.2.4:9001 check
-	server minio4 192.168.2.5:9001 check
+	server minio1 192.168.2.10:9001 check
+	server minio2 192.168.2.20:9001 check
+	server minio3 192.168.2.30:9001 check
+	server minio4 192.168.2.40:9001 check
 
+frontend minio_frontend_9000
+    bind *:9000
+    mode http
+    default_backend minio_backend_9000
 
+backend minio_backend_9000
+    mode http
+    balance roundrobin
+    server minio1 192.168.2.10:9000 check
+	server minio2 192.168.2.20:9000 check
+	server minio3 192.168.2.30:9000 check
+	server minio4 192.168.2.40:9000 check
 
 

@@ -1,35 +1,3 @@
-- name: haproxy
-  cpus: 1
-  memory: 1048
-  net: private_network
-  ip: 192.168.2.5
-  netbr:
-  - tiporede: public_network
-    adaptador: "Killer E2600 Gigabit Ethernet Controller"
-    dns: "8.8.8.8"
-    ipfixo:
-    tipoconexao: "dhcp"
-  - tiporede: private_network
-    ipfixo: 192.168.2.5
-    dns: 8.8.8.8
-  enableport: true
-  ports:
-  - guest: 80
-    host: 8888
-  enabledisk: false
-  disks:
-  - size: 5GB
-    name: sdb
-  - size: 5GB
-    name: sdc
-  - size: 5GB
-    name: sdd
-  - size: 5GB
-    name: sde
-  box: bento/debian-12
-  script: prov/haproxy.sh
-  folder:
-
 - name: minio1
   cpus: 1
   memory: 1048
@@ -37,19 +5,22 @@
   - tiporede: private_network
     ipfixo: 192.168.2.10
     dns: 8.8.8.8
-  enableport: false
   ports:
-  - guest: 9000
+  - status: true
+    guest: 9000
     host: 9000
-  enabledisk: true
   disks:
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdb
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdc
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdd
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sde
   box: bento/debian-12
   script: prov/minio.sh
@@ -62,19 +33,22 @@
   - tiporede: private_network
     ipfixo: 192.168.2.20
     dns: 8.8.8.8
-  enableport: false
   ports:
-  - guest: 9000
+  - status: true
+    guest: 9000
     host: 9002
-  enabledisk: true
   disks:
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdb
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdc
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdd
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sde
   box: bento/debian-12
   script: prov/minio.sh
@@ -87,19 +61,22 @@
   - tiporede: private_network
     ipfixo: 192.168.2.30
     dns: 8.8.8.8
-  enableport: false
   ports:
-  - guest: 9000
+  - status: true
+    guest: 9000
     host: 9003
-  enabledisk: true
   disks:
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdb
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdc
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdd
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sde
   box: bento/debian-12
   script: prov/minio.sh
@@ -112,20 +89,70 @@
   - tiporede: private_network
     ipfixo: 192.168.2.40
     dns: 8.8.8.8
-  enableport: false
   ports:
-  - guest: 9000
+  - status: true
+    guest: 9000
     host: 9004
-  enabledisk: true
   disks:
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdb
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdc
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sdd
-  - size: 5GB
+  - status: true
+    size: 5GB
     name: sde
   box: bento/debian-12
   script: prov/minio.sh
+  folder:
+- name: ha
+  cpus: 1
+  memory: 1048
+  netbr:
+  - tiporede: public_network
+    adaptador: "Killer E2600 Gigabit Ethernet Controller"
+    dns: "8.8.8.8"
+    ipfixo: 192.168.18.3
+    tipoconexao: fixo
+  - tiporede: private_network
+    ipfixo: 192.168.2.5
+    dns: 8.8.8.8
+  ports:
+  - status: true
+    guest: 80
+    host: 8888
+  disks:
+  - status: false
+    size: 1GB
+    name: sdb
+  box: bento/debian-12
+  script: prov/haproxy.sh
+  folder:
+
+- name: ng
+  cpus: 1
+  memory: 1048
+  netbr:
+  - tiporede: public_network
+    adaptador: "Killer E2600 Gigabit Ethernet Controller"
+    dns: "8.8.8.8"
+    ipfixo: 192.168.18.4
+    tipoconexao: fixo
+  - tiporede: private_network
+    ipfixo: 192.168.2.5
+    dns: 8.8.8.8
+  ports:
+  - status: true
+    guest: 80
+    host: 8881
+  disks:
+  - status: false
+    size: 1GB
+    name: sdb
+  box: bento/debian-12
+  script: prov/nginx.sh
   folder:

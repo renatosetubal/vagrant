@@ -15,8 +15,8 @@ echo "/dev/sdd /mnt/disk3 xfs defaults 0 0" >> /etc/fstab
 echo "/dev/sde /mnt/disk4 xfs defaults 0 0" >> /etc/fstab
 mount -a
 systemctl daemon-reload
-cp /vagrant/prov/minio /etc/default/minio
-cp /vagrant/prov/minio.service /usr/lib/systemd/system/
+cp /vagrant/prov/miniofiles/minio /etc/default/minio
+cp /vagrant/prov/miniofiles/minio.service /usr/lib/systemd/system/
 groupadd -r minio-user
 useradd -M -r -g minio-user minio-user
 mkdir -p /mnt/disk{1..4}/minio
