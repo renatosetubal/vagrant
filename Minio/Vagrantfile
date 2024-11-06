@@ -20,6 +20,7 @@ Vagrant.configure("2") do |config|
             if netbr["tiporede"] == "private_network"
               server.vm.network netbr["tiporede"], ip: netbr["ipfixo"], dns: netbr["dns"] 
             else
+              #server.vm.network netbr["tiporede"], bridge: netbr["adaptador"],  type: netbr["tipoconexao"], dns: netbr["dns"]
               if netbr["tipoconexao"] == "dhcp"
                 server.vm.network netbr["tiporede"], bridge: netbr["adaptador"],  type: netbr["tipoconexao"], dns: netbr["dns"]
               else

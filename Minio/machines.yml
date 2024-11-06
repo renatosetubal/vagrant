@@ -23,7 +23,7 @@
     size: 5GB
     name: sde
   box: bento/debian-12
-  script: prov/minio.sh
+  script: scripts/minio.sh
   folder:
 
 - name: minio2
@@ -51,7 +51,7 @@
     size: 5GB
     name: sde
   box: bento/debian-12
-  script: prov/minio.sh
+  script: scripts/minio.sh
   folder:
 
 - name: minio3
@@ -79,7 +79,7 @@
     size: 5GB
     name: sde
   box: bento/debian-12
-  script: prov/minio.sh
+  script: scripts/minio.sh
   folder:
 
 - name: minio4
@@ -107,16 +107,18 @@
     size: 5GB
     name: sde
   box: bento/debian-12
-  script: prov/minio.sh
+  script: scripts/minio.sh
   folder:
+
 - name: ha
   cpus: 1
   memory: 1048
   netbr:
   - tiporede: public_network
-    adaptador: "Killer E2600 Gigabit Ethernet Controller"
+    #adaptador: "Killer E2600 Gigabit Ethernet Controller"
+    adaptador: "Intel(R) Ethernet Connection (17) I219-LM"
     dns: "8.8.8.8"
-    ipfixo: 192.168.18.3
+    ipfixo: 10.0.19.41
     tipoconexao: fixo
   - tiporede: private_network
     ipfixo: 192.168.2.5
@@ -130,29 +132,33 @@
     size: 1GB
     name: sdb
   box: bento/debian-12
-  script: prov/haproxy.sh
+  script: scripts/haproxy.sh
   folder:
 
-- name: ng
+- name: bkp
   cpus: 1
   memory: 1048
   netbr:
-  - tiporede: public_network
-    adaptador: "Killer E2600 Gigabit Ethernet Controller"
-    dns: "8.8.8.8"
-    ipfixo: 192.168.18.4
-    tipoconexao: fixo
   - tiporede: private_network
-    ipfixo: 192.168.2.5
+    ipfixo: 192.168.2.7
     dns: 8.8.8.8
   ports:
-  - status: true
-    guest: 80
-    host: 8881
-  disks:
   - status: false
+    guest: 80
+    host: 8080
+  disks:
+  - status: true
     size: 1GB
     name: sdb
+  - status: true
+    size: 1GB
+    name: sdc
+  - status: true
+    size: 1GB
+    name: sdd
+  - status: true
+    size: 1GB
+    name: sde
   box: bento/debian-12
-  script: prov/nginx.sh
+  script: scripts/srvbkp.sh
   folder:
