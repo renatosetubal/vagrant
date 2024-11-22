@@ -1,4 +1,3 @@
-
 - name: apache
   cpus: 2
   memory: 3024
@@ -18,6 +17,7 @@
   script: prov/debianglpi.sh
   folder:
 
+
 - name: mariadb
   cpus: 2
   memory: 2048
@@ -34,6 +34,7 @@
   box: bento/debian-12
   script: prov/debianmariadb.sh
   folder:
+
 
 - name: glpi
   cpus: 2
@@ -56,6 +57,7 @@
   script: prov/debianglpi.sh
   folder:
 
+
 - name: fedora40
   cpus: 4
   memory: 6048
@@ -72,6 +74,7 @@
   box: bento/fedora-latest
   script:
   folder:
+
 
 - name: qemu
   cpus: 2
@@ -90,6 +93,7 @@
   script:
   folder:
 
+
 - name: bacula
   cpus: 2
   memory: 4048
@@ -106,6 +110,7 @@
   box: ubuntu/xenial64
   script:
   folder:
+
 
 - name: Alma9
   cpus: 2
@@ -124,6 +129,7 @@
   script:
   folder:
 
+
 - name: nfs
   cpus: 1
   memory: 1048
@@ -139,4 +145,22 @@
     desc: sdb
   box: bento/debian-12
   script: prov/nfs.sh
+  folder:
+
+
+- name: guacamole
+  cpus: 2
+  memory: 3048
+  net: private_network
+  ip: 192.168.2.36
+  enableport: false
+  ports:
+  - guest: 2049
+    host: 2049
+  disk:
+    enable: false
+    size: 5GB
+    desc: sdb
+  box: bento/debian-12
+  script:
   folder:
