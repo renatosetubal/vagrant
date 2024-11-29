@@ -1,0 +1,86 @@
+- name: ansible
+  cpus: 3
+  memory: 6048
+  netbr:
+  - tiporede: private_network
+    ipfixo: 192.168.2.10
+    dns: 8.8.8.8
+  ports:
+  - status: false
+    guest: 9000
+    host: 9000
+  box: bento/debian-12
+  script: scripts/ansible.sh
+  folder:
+
+
+- name: mariadb
+  cpus: 1
+  memory: 1048
+  netbr:
+  - tiporede: private_network
+    ipfixo: 192.168.2.20
+    dns: 8.8.8.8
+  ports:
+  - status: true
+    guest: 3006
+    host: 3006
+  box: bento/debian-12
+  script: scripts/ansibleclient.sh
+  folder:
+
+
+- name: apache
+  cpus: 1
+  memory: 1048
+  netbr:
+  - tiporede: private_network
+    ipfixo: 192.168.2.30
+    dns: 8.8.8.8
+  ports:
+  - status: true
+    guest: 80
+    host: 8888
+  disks:
+  - status: true
+    size: 1GB
+    name: sdb
+  box: bento/debian-12
+  script: scripts/ansibleclient.sh
+  folder:
+
+
+- name: nginx
+  cpus: 1
+  memory: 1048
+  netbr:
+  - tiporede: private_network
+    ipfixo: 192.168.2.40
+    dns: 8.8.8.8
+  ports:
+  - status: true
+    guest: 80
+    host: 8880
+  disks:
+  - status: true
+    size: 1GB
+    name: sdb
+  box: bento/debian-12
+  script: scripts/ansibleclient.sh
+  folder:
+
+
+- name: nfs
+  cpus: 1
+  memory: 1048
+  netbr:
+  - tiporede: private_network
+    ipfixo: 192.168.2.50
+    dns: 8.8.8.8
+  ports:
+  - status: false
+    guest: 80
+    host: 8080
+  box: bento/debian-12
+  script: scripts/ansibleclient.sh
+  folder:
