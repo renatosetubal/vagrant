@@ -1,0 +1,1 @@
+ansible apache -m ping -i /vagrant/inventory/invent.txt
