@@ -6,4 +6,4 @@ cp -fv ~/.ssh/id_rsa.pub /vagrant/ansible_ssh.key
 echo "192.168.2.20 mariadb" >> /etc/hosts
 echo "192.168.2.30 apache" >> /etc/hosts
 echo "192.168.2.40 nginx" >> /etc/hosts
-echo "export ANSIBLE_HOST_KEY_CHECKING=False" >> /etc/profile
+echo "ANSIBLE_HOST_KEY_CHECKING=False" >> /etc/profile
