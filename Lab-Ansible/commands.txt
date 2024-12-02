@@ -1,1 +1,6 @@
 ansible apache -m ping -i /vagrant/inventory/invent.txt
+#Simular aplicação
+ansible-playbook -i inventory seu_playbook.yml --check
+
+#Executando com detalhes
+ansible-playbook -i inventory seu_playbook.yml -v
