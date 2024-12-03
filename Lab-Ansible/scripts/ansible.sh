@@ -7,3 +7,4 @@ echo "192.168.2.20 mariadb" >> /etc/hosts
 echo "192.168.2.30 apache" >> /etc/hosts
 echo "192.168.2.40 nginx" >> /etc/hosts
 echo "export ANSIBLE_HOST_KEY_CHECKING=False" >> ~/.bashrc
+sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
