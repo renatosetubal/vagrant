@@ -1,4 +1,0 @@
-mariadb ansbile_host=192.168.2.20
-apache ansible_host=192.168.2.30
-nginx ansible_host=192.168.2.40
-nfs ansible_host=192.168.2.50

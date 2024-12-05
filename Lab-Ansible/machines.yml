@@ -84,3 +84,19 @@
   box: bento/debian-12
   script: scripts/ansibleclient.sh
   folder:
+
+
+- name: java
+  cpus: 1
+  memory: 1048
+  netbr:
+  - tiporede: private_network
+    ipfixo: 192.168.2.60
+    dns: 8.8.8.8
+  ports:
+  - status: true
+    guest: 80
+    host: 8080
+  box: bento/debian-12
+  script: scripts/ansibleclient.sh
+  folder:
