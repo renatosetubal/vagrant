@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 apt update;
 apt install -y net-tools software-properties-common ansible
 ssh-keygen -t rsa -b 4096 -N "" -f ~/.ssh/id_rsa

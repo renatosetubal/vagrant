@@ -1,0 +1,26 @@
+---
+# Atualizar pacotes no sistema Debian/Ubuntu
+- name: Atualizar o cache de pacotes
+  apt:
+    update_cache: yes
+
+- name: Atualizar pacotes instalados
+  apt:
+    upgrade: dist
+    autoremove: yes
+
+- name: Instalar pacote git
+  apt:
+    name: git
+    state: present
+- name: Configurar Hosts Laboratorio Ansible
+  lineinfile:
+    dest: /etc/hosts
+    state: present
+    line: "{{item}}"
+  with_items:
+  - 192.168.2.10 ansible
+  - 192.168.2.20 mariadb
+  - 192.168.2.30 apache
+  - 192.168.2.40 nginx
+  - 192.168.2.50 nfs

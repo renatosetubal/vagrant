@@ -1,0 +1,49 @@
+---
+- name: Configurar versão compatível do PHP para GLPI
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Adicionar repositório do PHP (Debian/Ubuntu)
+      apt_repository:
+        repo: "ppa:ondrej/php"
+        state: present
+
+    - name: Atualizar lista de pacotes
+      apt:
+        update_cache: yes
+
+    - name: Instalar PHP 8.1 e módulos necessários
+      apt:
+        name:
+          - php8.1
+          - php8.1-cli
+          - php8.1-fpm
+          - php8.1-common
+          - php8.1-mysql
+          - php8.1-xml
+          - php8.1-curl
+          - php8.1-mbstring
+          - php8.1-zip
+          - php8.1-bcmath
+          - php8.1-intl
+        state: present
+
+    - name: Configurar PHP 8.1 no Apache
+      shell: |
+        a2dismod php8.2 || true
+        a2enmod php8.1
+        systemctl restart apache2
+
+    - name: Ajustar permissões do diretório GLPI
+      file:
+        path: /var/www/glpi
+        state: directory
+        owner: www-data
+        group: www-data
+        recurse: yes
+
+    - name: Reiniciar o Apache
+      service:
+        name: apache2
+        state: restarted

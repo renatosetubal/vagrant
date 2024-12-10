@@ -1,0 +1,78 @@
+---
+- name: Configurar Servidor de App java"
+  hosts: java
+
+  user: java
+  become: yes
+
+  vars:
+  - dbhost: "db01"
+  - dbname: "notes"
+  - dbusername: "root"
+  - dbpassword: "P@ssword"
+  tasks:
+  - name: Configurar hosts do laboratório
+    lineinfile:
+      path: "/etc/hosts"
+      line: "{{ item }}"
+    with_items:
+    - "192.168.2.10 ansible"
+    - "192.168.2.60 java"
+    - "192.168.2.30 mariadb"
+  - name: Adicionar usuario da aplicacao
+    user:
+      name: app
+      comment: Usuario de aplicacao
+      uid: 500
+  - name: Install Mave
+    apt:
+      name: maven
+      state: lastest
+  - name: Install Java 8
+    apt:
+      name: java-1.8.0-openjdk
+      state: latest
+  - name: Criacao do diretorio de App
+    file:
+      path: /opt/notes
+      state: directory
+      owner: app
+      group: app
+  - name: Clonando repositorio
+    git:
+      repo: 'https://github.com/callicoder/spring-boot-mysql-rest-api-tutorial.git'
+      dest: /opt/notes
+      clone: yes
+      force: yes
+  - name: Configurar arquivos de propriedades para banco de dados
+    templates:
+      src: application.properties
+      dest: /opt/notes/src/main/resources/application.properties
+  - name: Gerar pacote da aplicacao
+    command: mvn -f /opt/notes/pom.xml package
+    become_user: app
+  - name: Registrar versao oficial do pacote
+    shell:
+      cmd: mvn -o -q -Dexec.executable=echo -Dexec.args='${project.version}'
+      chdir: /opt/notes/
+    register: app_version
+  - name: Configuracao do Systemd
+    templates:
+      src: etc/systemd/system/notes.service
+      dst: /etc/systemd/system/notes.service
+      notify: reload daemon
+  - name: Iniciar Servico notesapp
+    service:
+      name: notes
+      state: restarted
+  roles:
+  - defaultos
+  handlers:
+  - name: reload app
+    systemd:
+      state: restarted
+      daemon_reload: yes
+      name: 'notes'
+  - name: reload daemon
+    systemd:
+      daemon_reexec: yes

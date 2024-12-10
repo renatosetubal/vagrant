@@ -6,3 +6,5 @@ ansible-playbook -i inventory seu_playbook.yml --check
 ansible-playbook -i inventory seu_playbook.yml -v
 
 ping -m ping all
+
+ansible-playbook -i /vagrant/inventory/inventory.ini /vagrant/playbook/glpi.yaml

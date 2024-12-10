@@ -1,0 +1,46 @@
+---
+- name: Playbook para instalar e configurar o MariaDB Server
+  hosts: mariadb_server
+  become: yes
+
+  vars_files:
+  - vars/banco.yaml
+  vars:
+  - mariadb_user: user
+  - mariadb_user_password: P@ssw0rd
+
+  tasks:
+  - name: Configurar hosts do laboratório
+    lineinfile:
+      path: "/etc/hosts"
+      line: "{{ item }}"
+    with_items:
+    - "192.168.2.10 ansible"
+    - "192.168.2.60 java"
+    - "192.168.2.30 mariadb"
+
+  #Habilitar e iniciar o serviço
+  - name: Habilitar e iniciar o MariaDB
+    service:
+      name: mariadb
+      state: started
+      enabled: yes
+  # Configurar arquivo de configuração (my.cnf)
+  - name: Configurar arquivo my.cnf
+    copy:
+      dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+      content: |
+        [mysqld]
+        bind-address = {{ mariadb_bind_address }}
+        port = {{ mariadb_port }}
+    notify:
+    - Restart MariaDB
+
+  handlers:
+  - name: Restart MariaDB
+    service:
+      name: mariadb
+      state: restarted
+  roles:
+  - defaultos
+  - mariadb_setup

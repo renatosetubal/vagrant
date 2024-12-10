@@ -1,0 +1,16 @@
+mariadb_root_password: P@ssw0rd
+mariadb_bind_address: 0.0.0.0
+dbname: "db01"
+dbusername: "root"
+dbpassword: "P@ssw0rd"
+mariadb_port: 3306
+
+# mariadb_databases:
+# - name: notes
+#   encoding: utf8
+#   collation: utf8_general_ci
+# mariadb_user:
+# - name: notesapp
+#   host: "%"
+#   password: P@ssword
+#   priv: "notes.*:ALL"
