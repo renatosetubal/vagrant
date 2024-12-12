@@ -5,6 +5,12 @@ ansible-playbook -i inventory seu_playbook.yml --check
 #Executando com detalhes
 ansible-playbook -i inventory seu_playbook.yml -v
 
-ping -m ping all
+ansible -m ping all
 
 ansible-playbook -i /vagrant/inventory/inventory.ini /vagrant/playbook/glpi.yaml
+apache -a "df -h"
+
+ansible-doc apt #verificar ajuda do modulo ansible
+ansible-playbook /vagrant/playbook/ping.yaml --syntax-check
+ansible-playbook /vagrant/playbook/ping.yaml --list-hosts
+ansible-playbook /vagrant/playbook/ping.yaml --list-tasks

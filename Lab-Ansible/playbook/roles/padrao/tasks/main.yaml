@@ -13,6 +13,7 @@
   apt:
     name: git
     state: present
+
 - name: Configurar Hosts Laboratorio Ansible
   lineinfile:
     dest: /etc/hosts

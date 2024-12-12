@@ -12,3 +12,5 @@ cat <<EOT >> /etc/hosts
 EOT
 echo "export ANSIBLE_HOST_KEY_CHECKING=False" >> ~/.bashrc
 sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+mkdir -p /etc/ansible
+cp /vagrant/inventory/inventory.ini /etc/ansible/hosts
