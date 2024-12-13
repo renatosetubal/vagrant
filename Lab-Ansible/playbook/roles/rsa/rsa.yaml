@@ -1,0 +1,11 @@
+---
+- name: Public Key para os hosts gerenciaveis
+  hosts: apache
+  tasks:
+  - name: Gravando ~/.ssh/authorized_hosts
+    authorized_key:
+      user: root
+      state: present
+      key: '{{item}}'
+    with_file:
+    - ~/.ssh/id_rsa.pub

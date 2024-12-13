@@ -1,0 +1,73 @@
+---
+- name: Exemplo com o modulo Ping
+  hosts: apache_server
+  tasks:
+  - ping: ~
+
+- hosts: apache
+  become: true
+  tasks:
+  - name: Criando arquivo
+    file: path=/home/vagrant/file.txt state=touch mode=755 owner=vagrant group=vagrant
+  - name: Criando diretorio
+    file: path=/home/vagrant/ansible state=directory mode=755 owner=vagrant group=vagrant
+  - name: Create three more directories inside ansible
+    file: path={{item}} state=directory mode=755 owner=vagrant group=vagrant
+    with_items:
+    - '/home/vagrant/ansible/dir01'
+    - '/home/vagrant/ansible/dir02'
+    - '/home/vagrant/ansible/dir03'
+
+- hosts: apache
+  become: true
+  tasks:
+  - name: Criacao de usuario
+    user: name=ansible password=P@ssw0rd groups=vagrant shell=/bin/bash
+
+- hosts: app
+  become: true
+  tasks:
+  - name: Remover usuario
+    user: name=ansible state=absent remove=yes force=yes
+
+- hosts: app
+  become: true
+  tasks:
+  - name: Deletar um diretorio
+    file: path:=/home/vagrant/ansible state=absent
+
+- hosts: apache
+  become: true
+  tasks:
+  - name: Create several files
+    file: path={{item}} state=touch
+    with_items:
+    - '/home/vagrant/file1'
+    - '/home/vagrant/file2'
+    - '/home/vagrant/file3'
+  - name: Copiar conteúdo para um arquivo
+    copy: content="Algum conteudo necessário" dest=/home/vagrant/file1
+
+- name: Update e upgrade Debian
+  hosts: apache
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: Update Debian Linux packages
+    apt:
+      upgrade: dist
+      update_cache: yes
+      autoremove: yes
+      autoclean: yes
+    when: ansible_os_family == "Debian"
+
+- hosts: apache
+  become: yes
+  tasks:
+  - name: Zipar multiplos arquivos
+    archive:
+      path:
+      - '/home/vagrant/file1'
+      - '/home/vagrant/file2'
+      dest: /opt/meusarquivos.zip
+      format: zip

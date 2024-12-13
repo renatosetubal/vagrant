@@ -1,0 +1,5 @@
+---
+- name: Ping para o servidor Apache
+  hosts: apache
+  tasks:
+  - ping: ~

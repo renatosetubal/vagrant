@@ -14,3 +14,7 @@ ansible-doc apt #verificar ajuda do modulo ansible
 ansible-playbook /vagrant/playbook/ping.yaml --syntax-check
 ansible-playbook /vagrant/playbook/ping.yaml --list-hosts
 ansible-playbook /vagrant/playbook/ping.yaml --list-tasks
+ansible java_server --list-hosts
+ansible all --list-hosts
+
+$ANSIBLE_CONFIG -> Variavel que guarda o local do arquivo de configuração ansible. 
