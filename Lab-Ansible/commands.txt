@@ -16,5 +16,16 @@ ansible-playbook /vagrant/playbook/ping.yaml --list-hosts
 ansible-playbook /vagrant/playbook/ping.yaml --list-tasks
 ansible java_server --list-hosts
 ansible all --list-hosts
-
+ansible myself -i /vagrant/deploy-manage/inventory --list-hosts
 $ANSIBLE_CONFIG -> Variavel que guarda o local do arquivo de configuração ansible. 
+
+####Ad hoc commands
+ansible -m user -a "name=renato uid=2000 state=present" apache
+ansible apache -m command -a /usr/bin/hostname -o
+ansible apache -m command -a 'id' -u vagrant --ask-pass
+ansible localhost -m command -a 'id' -u vagrant --ask-pass
+ansible localhost -m copy -a 'content="Teste de ansible \n" dest=/etc/motd' -u vagrant --become
+####Deployng ansible
+ansible-playbook --syntax-check nome.yaml
+ansible-playbook -C nome.yaml
+ansible-doc -s yum /apt
