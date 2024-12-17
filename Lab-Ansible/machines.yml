@@ -1,9 +1,9 @@
 - name: ansible
-  cpus: 3
-  memory: 6048
+  cpus: 1
+  memory: 2048
   netbr:
   - tiporede: private_network
-    ipfixo: 192.168.2.10
+    ipfixo: 192.168.2.5
     dns: 8.8.8.8
   ports:
   - status: false
@@ -14,7 +14,23 @@
   folder:
 
 
-- name: mariadb
+- name: srv01
+  cpus: 1
+  memory: 2048
+  netbr:
+  - tiporede: private_network
+    ipfixo: 192.168.2.10
+    dns: 8.8.8.8
+  ports:
+  - status: false
+    guest: 9000
+    host: 9000
+  box: bento/debian-12
+  script: scripts/ansibleclient.sh
+  folder:
+
+
+- name: srv02
   cpus: 1
   memory: 1048
   netbr:
@@ -30,7 +46,7 @@
   folder:
 
 
-- name: apache
+- name: srv03
   cpus: 1
   memory: 1048
   netbr:
@@ -42,7 +58,7 @@
     guest: 80
     host: 8888
   disks:
-  - status: true
+  - status: false
     size: 1GB
     name: sdb
   box: bento/debian-12
@@ -50,7 +66,7 @@
   folder:
 
 
-- name: nginx
+- name: srv04
   cpus: 1
   memory: 1048
   netbr:
@@ -58,11 +74,11 @@
     ipfixo: 192.168.2.40
     dns: 8.8.8.8
   ports:
-  - status: true
+  - status: false
     guest: 80
     host: 8880
   disks:
-  - status: true
+  - status: false
     size: 1GB
     name: sdb
   box: bento/debian-12
@@ -70,7 +86,7 @@
   folder:
 
 
-- name: nfs
+- name: srv05
   cpus: 1
   memory: 1048
   netbr:
@@ -86,7 +102,7 @@
   folder:
 
 
-- name: java
+- name: srv06
   cpus: 1
   memory: 1048
   netbr:
@@ -94,7 +110,7 @@
     ipfixo: 192.168.2.60
     dns: 8.8.8.8
   ports:
-  - status: true
+  - status: false
     guest: 80
     host: 8080
   box: bento/debian-12
