@@ -17,7 +17,7 @@ ansible-playbook /vagrant/playbook/ping.yaml --list-tasks
 ansible java_server --list-hosts
 ansible all --list-hosts
 ansible myself -i /vagrant/deploy-manage/inventory --list-hosts
-$ANSIBLE_CONFIG -> Variavel que guarda o local do arquivo de configuração ansible. 
+ANSIBLE_CONFIG=/etc/ansible/hosts -> Variavel que guarda o local do arquivo de configuração ansible. 
 
 ####Ad hoc commands
 ansible -m user -a "name=renato uid=2000 state=present" apache

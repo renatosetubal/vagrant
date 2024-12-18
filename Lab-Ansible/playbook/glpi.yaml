@@ -90,9 +90,11 @@
     shell: |
       mv /var/www/verdanadesk/glpi/files /var/www/verdanadesk/
       ln -s /var/www/verdanadesk/files/ /var/www/verdanadesk/glpi/files
+      ln -s /var/www/verdanadesk/glpi /var/www/html/glpi
+      ln -s /var/www/verdanadesk/config /var/www/html/glpi/config
       mv /var/www/verdanadesk/glpi/config /var/www/verdanadesk/
       mkdir -p /var/www/verdanadesk/glpi/marketplace
-      sed -i "s|'GLPI_CONFIG_DIR' *=> *GLPI_ROOT \. '/\.\./\.\./config'|'GLPI_CONFIG_DIR'      => GLPI_ROOT . '../../config'|" /var/www/verdanadesk/glpi/inc/based_config.php
+      sed -i "s|'GLPI_CONFIG_DIR' *=> *GLPI_ROOT \. '/\.\./\.\./config'|'GLPI_CONFIG_DIR'      => GLPI_ROOT . '/config'|" /var/www/verdanadesk/glpi/inc/based_config.php
       sed -i "s|'GLPI_VAR_DIR' *=> *GLPI_ROOT \. '/\.\./\.\./files'|'GLPI_VAR_DIR' => GLPI_ROOT . '/files'|" /var/www/verdanadesk/glpi/inc/based_config.php
 
   - name: Ajustar propriedades da aplicacao GLPI
@@ -103,7 +105,6 @@
       chown www-data:www-data /var/www/verdanadesk/glpi/marketplace -Rf
       find /var/www/verdanadesk/ -type d -exec chmod 755 {} \;
       find /var/www/verdanadesk/ -type f -exec chmod 644 {} \;
-      ln -s /var/www/verdanadesk/glpi /var/www/html/glpi
 
   - name: Habilitando modulos apache
     shell: |

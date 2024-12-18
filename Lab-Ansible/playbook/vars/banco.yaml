@@ -1,7 +1,7 @@
 mariadb_root_password: P@ssw0rd
 mariadb_bind_address: 0.0.0.0
 dbname: "db01"
-dbusername: "root"
+dbusername: "dba"
 dbpassword: "P@ssw0rd"
 mariadb_port: 3306
 

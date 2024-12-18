@@ -4,10 +4,10 @@
   apt:
     update_cache: yes
 
-- name: Atualizar pacotes instalados
-  apt:
-    upgrade: dist
-    autoremove: yes
+# - name: Atualizar pacotes instalados
+#   apt:
+#     upgrade: dist
+#     autoremove: yes
 
 - name: Instalar pacote git
   apt:
