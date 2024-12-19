@@ -25,7 +25,23 @@ ansible apache -m command -a /usr/bin/hostname -o
 ansible apache -m command -a 'id' -u vagrant --ask-pass
 ansible localhost -m command -a 'id' -u vagrant --ask-pass
 ansible localhost -m copy -a 'content="Teste de ansible \n" dest=/etc/motd' -u vagrant --become
+
 ####Deployng ansible
 ansible-playbook --syntax-check nome.yaml
 ansible-playbook -C nome.yaml
 ansible-doc -s yum /apt
+
+####Secret
+ansible-vault create secret.yaml
+ansible-vault create --vault-password-file=vault-pass secret.yaml #?
+ansible-vault view secret.yaml
+ansible-vault edit secret.yaml
+ansible-vault encrypt secret.yaml 
+ansible-vault decrypt secret.yaml --output=segredorevelado.yaml
+#Para mudar a senha do arquivo de encriptação
+ansible-vault rekey secret.yaml 
+ansible-vault rekey --new-vault-password-file=novo_arquivo_senha secret.yaml
+ansible-playbook --vault-id @prompt site.yaml
+ansible-playbook --vault-id arquivo@prompt site.yaml
+
+####Managing Facts

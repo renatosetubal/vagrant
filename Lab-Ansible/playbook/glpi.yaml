@@ -112,5 +112,11 @@
       a2enmod rewrite
       a2enconf verdanadesk.conf
       systemctl reload apache2
+      
+  - name: Verificando conexao com Apache
+    uri: 
+      url: http://192.168.2.10
+      status_code: 200
+
   roles:
   - padrao
